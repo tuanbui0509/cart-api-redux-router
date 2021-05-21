@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { React, Fragment } from "react";
+import Menu from './components/Menu/Menu'
+import ProductList from './components/ProductList/ProductList'
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Fragment>
+            <Menu />
+
+            <div className="container mt-5">
+                <div className="row">
+                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" className="btn btn-info mb-1">Thêm sản phẩm</button>
+                        <ProductList/>
+                    </div>
+                </div>
+            </div>
+        </Fragment>
+
+    );
 }
 
 export default App;
