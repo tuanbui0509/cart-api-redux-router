@@ -1,5 +1,39 @@
 import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom'
 
+const menus = [
+    {
+        label: 'Trang chủ',
+        to: '/',
+        exact: true
+    },
+    {
+        label: 'Quản lý sản phẩm',
+        to: '/product-list',
+        exact: false
+    }
+]
+
+const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
+    return (
+        <Route
+            path={to}
+            exact={activeOnlyWhenExact}
+            children={({ match }) => {
+                let active = match ? 'active' : '';
+                return (
+                    <li className={`nav-item ${active}`}>
+                        <Link className="nav-link"
+                            to={to}
+                        >
+                            {label}
+                        </Link>
+                    </li>
+                )
+            }}
+        />
+    );
+}
 class Menu extends Component {
     render() {
         return (
@@ -8,16 +42,27 @@ class Menu extends Component {
                 <a className="navbar-brand" href="/#">Call API</a>
                 {/* Links */}
                 <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="/#">Trang chủ</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/#">Sản phẩm</a>
-                    </li>
-
+                    {this.showMenus(menus)}
                 </ul>
             </nav>
         );
+    }
+
+    showMenus=(menus)=>{
+        let result =null;
+        if(menus.length>0){
+            result = menus.map((menu,index)=>{
+                return (
+                    <MenuLink
+                        key={index}
+                        label={menu.label}
+                        to={menu.to}
+                        activeOnlyWhenExact={menu.exact}
+                    />
+                );
+            })
+        }
+        return result;
     }
 }
 
