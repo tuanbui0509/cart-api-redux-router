@@ -13,7 +13,7 @@ const menus = [
         exact: false
     }
 ]
-
+// custom Link
 const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
     return (
         <Route
@@ -23,9 +23,9 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
                 let active = match ? 'active' : '';
                 return (
                     <li className={`nav-item ${active}`}>
-                        <Link className="nav-link"
-                            to={to}
-                        >
+                        <Link
+                            className="nav-link"
+                            to={to} >
                             {label}
                         </Link>
                     </li>
@@ -48,10 +48,10 @@ class Menu extends Component {
         );
     }
 
-    showMenus=(menus)=>{
-        let result =null;
-        if(menus.length>0){
-            result = menus.map((menu,index)=>{
+    showMenus = (menus) => {
+        let result = null;
+        if (menus.length > 0) {
+            result = menus.map((menu, index) => {
                 return (
                     <MenuLink
                         key={index}
