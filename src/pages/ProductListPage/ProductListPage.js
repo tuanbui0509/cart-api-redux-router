@@ -2,10 +2,34 @@ import React, { Component } from 'react'
 import ProductList from '../../components/ProductList/ProductList'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { connect } from 'react-redux'
+import axios from 'axios'
 class ProductListPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: []
+        };
+    }
+
+    componentDidMount() {
+        console.log("componentDidMount");
+        axios({
+            method: 'GET',
+            url: 'http://localhost:3000/product',
+            data: null
+        }).then(res => {
+            console.log(res);
+            this.setState({
+                products: res.data
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
     render() {
-        // let {products} = this.props;
-        let products =[];
+        console.log("render");
+        let { products } = this.props;
         return (
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <button type="button" className="btn btn-info mb-1">Thêm sản phẩm</button>
@@ -36,4 +60,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,null)(ProductListPage);
+export default connect(mapStateToProps, null)(ProductListPage);
