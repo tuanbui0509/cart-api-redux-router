@@ -10,7 +10,7 @@ export default class App extends Component {
                 <Menu />
                 <div className="container mt-5">
                     <div className="row">
-                        
+
                         {this.showContentMenus(routes)}
                     </div>
                 </div>
