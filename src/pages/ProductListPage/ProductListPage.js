@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ProductList from '../../components/ProductList/ProductList'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { connect } from 'react-redux'
-import axios from 'axios'
+import callApi from './../../utils/apiCaller'
 class ProductListPage extends Component {
     constructor(props) {
         super(props);
@@ -12,24 +12,15 @@ class ProductListPage extends Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount");
-        axios({
-            method: 'GET',
-            url: 'http://localhost:3000/product',
-            data: null
-        }).then(res => {
-            console.log(res);
+        callApi('product', 'GET', null).then(res => {
             this.setState({
                 products: res.data
             })
-        }).catch(err => {
-            console.log(err);
         });
     }
 
     render() {
-        console.log("render");
-        let { products } = this.props;
+        let { products } = this.state;
         return (
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <button type="button" className="btn btn-info mb-1">Thêm sản phẩm</button>
