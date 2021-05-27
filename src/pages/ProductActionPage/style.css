@@ -45,6 +45,17 @@
     margin-top: 20px;
 }
 
+.registration-form .create-back {
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #f0213c;
+    border: none;
+    color: white;
+    margin-top: 20px;
+}
+
 .registration-form .social-media {
     max-width: 600px;
     background-color: #fff;
@@ -99,4 +110,8 @@
     color: #868686;
     margin-right: 20px;
     display: inline-block;
+}
+
+.color-warning{
+    color: #df3434;
 }

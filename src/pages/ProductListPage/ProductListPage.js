@@ -3,6 +3,8 @@ import ProductList from '../../components/ProductList/ProductList'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { connect } from 'react-redux'
 import callApi from './../../utils/apiCaller'
+import { Link } from 'react-router-dom'
+// import axios from 'axios'
 class ProductListPage extends Component {
     constructor(props) {
         super(props);
@@ -15,15 +17,27 @@ class ProductListPage extends Component {
         callApi('product', 'GET', null).then(res => {
             this.setState({
                 products: res.data
-            })
+            });
         });
+        // axios({
+        //     url: 'http://localhost:3000/product',
+        //     method: 'GET',
+        //     data: null
+        // }).then(res => {
+        //     console.log(res);
+        //     this.setState({
+        //         products: res.data
+        //     })
+        // }).catch(err => {
+        //     console.log(err);
+        // })
     }
 
     render() {
         let { products } = this.state;
         return (
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <button type="button" className="btn btn-info mb-1">Thêm sản phẩm</button>
+                <Link to="/product/add" className="btn btn-info mb-1">Thêm sản phẩm</Link>
                 <ProductList>{this.showProducts(products)}</ProductList>
             </div>
         )

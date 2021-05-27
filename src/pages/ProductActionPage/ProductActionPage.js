@@ -1,35 +1,94 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
+import callApi from '../../utils/apiCaller';
 import '../ProductActionPage/style.css'
 export default class ProductActionPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = ({
+            id: '',
+            txtName: '',
+            txtPrice: '',
+            chbStatus: ''
+        })
+    }
+
+    onChange = (e) => {
+        let target = e.target;
+        let name = target.name;
+        let value = target.type === 'checkbox' ? target.checked : target.value;
+        this.setState({
+            [name]: value
+        })
+    }
+
+    onSave = (e) => {
+        e.preventDefault();
+        let { txtName, txtPrice, chbStatus } = this.state;
+        let { history } = this.props;
+        callApi('product', 'POST', {
+            name: txtName,
+            price: txtPrice,
+            status: chbStatus
+        }).then(res => {
+            // console.log(res);
+            history.goBack()
+            // history.push('/');
+        })
+    }
+
     render() {
+        let { txtName, txtPrice, chbStatus } = this.state;
         return (
             <div className="container registration">
                 <div className="registration-form">
-                    <form>
+                    <form onSubmit={this.onSave}>
                         <div className="form-icon">
                             <span><i className="icon icon-screen-smartphone" /></span>
                         </div>
                         <h4>Tên sản phẩm</h4>
                         <div className="form-group">
-                            <input type="text" className="form-control item" id="name" placeholder="Nhập tên" />
+                            <input
+                                type="text"
+                                className="form-control item"
+                                name="txtName" id="name"
+                                placeholder="Nhập tên"
+                                value={txtName}
+                                onChange={this.onChange}
+                                required
+                            />
                         </div>
                         <h4>Giá tiền</h4>
                         <div className="form-group">
-                            <input type="number" className="form-control item" id="price" placeholder="Nhập tiền" />
+                            <input
+                                type="number"
+                                className="form-control item"
+                                id="price" name="txtPrice"
+                                placeholder="Nhập tiền"
+                                value={txtPrice}
+                                onChange={this.onChange}
+                                required
+                            />
                         </div>
                         <h4>Trạng thái</h4>
                         <div className="form-group ">
-                            <label for="status" className="mr2">Còn hàng: </label>
-                            <input type="checkbox" id="status" />
+                            <label className="mr2">Còn hàng: </label>
+                            <input
+                                type="checkbox"
+                                id="status"
+                                name="chbStatus"
+                                value={chbStatus}
+                                onChange={this.onChange}
+                            />
                         </div>
 
                         <div className="form-group">
-                            <button type="button" className="btn btn-block create-account">Thêm sản phẩm</button>
+                            <button type="submit" className="btn btn-block create-account">Thêm sản phẩm</button>
+                        </div>
+                        <div className="form-group">
+                            <Link to="/product-list" className="btn btn-block create-back">Trở lại</Link>
                         </div>
                     </form>
-                    <div className="social-media">
-
-                    </div>
                 </div>
             </div>
         )
