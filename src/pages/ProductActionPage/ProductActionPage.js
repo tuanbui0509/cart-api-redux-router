@@ -30,6 +30,7 @@ export default class ProductActionPage extends Component {
                 })
             })
         }
+        
     }
 
     onChange = (e) => {
