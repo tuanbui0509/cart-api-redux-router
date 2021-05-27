@@ -13,6 +13,25 @@ export default class ProductActionPage extends Component {
         })
     }
 
+    componentDidMount() {
+        //lấy params để thực hiện
+        let { match } = this.props;
+        // console.log(match);
+        if (match) {
+            let id = match.params.id;
+            // console.log(id);
+            callApi(`product/${id}`, 'GET', null).then(res => {
+                let data = res.data;
+                this.setState({
+                    id: data.id,
+                    txtName: data.name,
+                    txtPrice: data.price,
+                    chbStatus: data.status
+                })
+            })
+        }
+    }
+
     onChange = (e) => {
         let target = e.target;
         let name = target.name;
@@ -24,17 +43,30 @@ export default class ProductActionPage extends Component {
 
     onSave = (e) => {
         e.preventDefault();
-        let { txtName, txtPrice, chbStatus } = this.state;
+        let { id, txtName, txtPrice, chbStatus } = this.state;
         let { history } = this.props;
-        callApi('product', 'POST', {
-            name: txtName,
-            price: txtPrice,
-            status: chbStatus
-        }).then(res => {
-            // console.log(res);
-            history.goBack()
-            // history.push('/');
-        })
+        if (id) {//update
+            callApi(`product/${id}`, 'PUT', {
+                name: txtName,
+                price: txtPrice,
+                status: chbStatus
+            }).then(res => {
+                // console.log(res);
+                history.goBack()
+                // history.push('/');
+            })
+        }
+        else {
+            callApi('product', 'POST', {
+                name: txtName,
+                price: txtPrice,
+                status: chbStatus
+            }).then(res => {
+                // console.log(res);
+                history.goBack()
+                // history.push('/');
+            })
+        }
     }
 
     render() {
@@ -78,6 +110,7 @@ export default class ProductActionPage extends Component {
                                 id="status"
                                 name="chbStatus"
                                 value={chbStatus}
+                                checked={chbStatus}
                                 onChange={this.onChange}
                             />
                         </div>
