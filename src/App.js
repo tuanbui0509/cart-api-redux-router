@@ -8,7 +8,7 @@ export default class App extends Component {
         return (
             <Router>
                 <Menu />
-                <div className="container mt-5">
+                <div className="container mt-1">
                     <div className="row">
 
                         {this.showContentMenus(routes)}

@@ -15,3 +15,18 @@ export const actFetchProducts = (products) => {
         products
     }
 }
+// call server
+export const actDeleteProductRequest = (id) => {
+    return dispatch => {
+        return callApi(`product/${id}`, 'DELETE', null).then(res => {
+            dispatch(actDeleteProduct(id));
+        })
+    }
+}
+
+export const actDeleteProduct = (id) => {
+    return {
+        type: types.DELETE_PRODUCTS,
+        id
+    }
+}
