@@ -71,7 +71,7 @@ export default class ProductActionPage extends Component {
     }
 
     render() {
-        let { txtName, txtPrice, chbStatus } = this.state;
+        let { id,txtName, txtPrice, chbStatus } = this.state;
         return (
             <div className="container registration">
                 <div className="registration-form">
@@ -117,7 +117,7 @@ export default class ProductActionPage extends Component {
                         </div>
 
                         <div className="form-group">
-                            <button type="submit" className="btn btn-block create-account">Thêm sản phẩm</button>
+                            <button type="submit" className="btn btn-block create-account">{id?'Cập nhật sản phẩm':'Thêm sản phẩm'}</button>
                         </div>
                         <div className="form-group">
                             <Link to="/product-list" className="btn btn-block create-back">Trở lại</Link>

@@ -1,12 +1,12 @@
 .registration{
-    background-color: #dee9ff;
+    background-color: #fff;
 }
 .registration-form {
-    padding: 50px 0;
+    padding: 35px 0;
 }
 
 .registration-form form {
-    background-color: #fff;
+    background-color: rgb(205, 225, 231);
     max-width: 600px;
     margin: auto;
     padding: 50px 70px;
