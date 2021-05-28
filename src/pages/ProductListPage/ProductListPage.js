@@ -14,7 +14,6 @@ class ProductListPage extends Component {
        this.props.onDeleteProduct(id);
     }
 
-  
 
     render() {
         let { products } = this.props;
